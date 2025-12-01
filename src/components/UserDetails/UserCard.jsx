@@ -1,8 +1,13 @@
-import { Children } from "react";
-
-export default function UserCard({ user, onUserSelected }) {
+export default function UserCard({ user, onUserSelected, highlight }) {
   return (
-    <div onClick={() => onUserSelected(user)}>
+    <div
+      onClick={() => onUserSelected(user)}
+      style={
+        highlight
+          ? { backgroundColor: "yellow", fontWeight: "bold" }
+          : undefined
+      }
+    >
       <p>{user.name}</p>
     </div>
   );
