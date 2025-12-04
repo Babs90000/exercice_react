@@ -3,8 +3,10 @@ export default function TodoForm({ valeur, setValeur, onAddTodo }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
+        onAddTodo()
       }}
     >
+
       <input
         type="text"
         value={valeur}

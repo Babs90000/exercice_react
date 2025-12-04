@@ -8,8 +8,8 @@ export default function TodoItem({
   setTodoList,
 }) {
   const todoId = todo.id;
-  const [isEditing, setIsEditing] = useState < boolean > false;
-  const [isEdit, setIsEdit] = useState < string > "";
+  const [isEditing, setIsEditing] = useState <boolean> (false);
+  const [isEdit, setIsEdit] = useState < string > ("");
 
   function handleEdit() {
     setTodoList(

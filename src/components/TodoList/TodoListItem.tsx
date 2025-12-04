@@ -4,7 +4,6 @@ export default function TodoListItem({
   onDeleteTodo,
   onToggled,
   setTodoList,
-  todoList,
 }) {
   const todoItems = (
     <div>

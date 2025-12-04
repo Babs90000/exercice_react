@@ -6,7 +6,6 @@ interface Todo {
 import { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoListItem from "./TodoListItem";
-import TodoList from "../TodoList";
 
 export default function TodoInterface() {
   const [valeur, setValeur] = useState("");

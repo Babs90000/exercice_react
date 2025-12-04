@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    // Cible et modules
+    "target": "esnext",
+    "module": "nodenext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // JSX pour React / React Native
+    "jsx": "react-jsx",
+
+    // Types globaux
+    "types": ["node", "react", "react-dom"],
+
+    // Sorties
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Strict Mode ultime
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
+
+    // Vérifications supplémentaires
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}
