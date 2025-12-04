@@ -78,3 +78,7 @@ export default function TodoInterface() {
     </>
   );
 }
+
+
+git config --global user.name "Babs90000"
+ git config --global user.email "b.camara.diaby@outlook.com"
