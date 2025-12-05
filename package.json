@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "preview": "vite preview",
     "tsc": "tsc",
-    "tsc:watch": "tsc --watch"
+    "tsc:watch": "tsc --watch",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "react": "^19.2.0",

@@ -3,13 +3,18 @@ interface Todo {
   text: string;
   completed: boolean;
 }
+
+export type FilterType = "all" | "active" | "completed";
+
 import { useEffect, useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoListItem from "./TodoListItem";
+import TodoFilter from "./TodoFilter";
+import styles from "./TodoInterface.module.css";
 
 export default function TodoInterface() {
   const [valeur, setValeur] = useState("");
-  /* const [isToggled, setIsToggled] = useState<boolean>(false); */
+  const [filter, setFilter] = useState<FilterType>("all");
   const [todoList, setTodoList] = useState<Todo[]>(() => {
     const data = localStorage.getItem("todoList");
     if (data) {
@@ -35,7 +40,7 @@ export default function TodoInterface() {
 
   // function handleUpdateTodo() {}
 
-  function handleDeleteTodo(todoId) {
+  function handleDeleteTodo(todoId: number): void {
     const newTodoList = todoList.filter((todo) => todo.id !== todoId);
     setTodoList(newTodoList);
   }
@@ -52,7 +57,7 @@ export default function TodoInterface() {
     setTodoList([...todoListIntermediaire, newTodo]);
   } */
 
-  function handleToggled(todoId) {
+  function handleToggled(todoId: number): void {
     setTodoList(
       todoList.map((todo) =>
         todo.id == todoId ? { ...todo, completed: !todo.completed } : todo,
@@ -60,25 +65,31 @@ export default function TodoInterface() {
     );
   }
 
-  console.log(todoList);
+  function getFilteredTodos(): Todo[] {
+    if (filter === "active") return todoList.filter((t) => !t.completed);
+    if (filter === "completed") return todoList.filter((t) => t.completed);
+    return todoList;
+  }
+
+  console.log(todoList.filter((t) => !t.completed));
+  console.log(todoList.filter((t) => t.completed));
+  const filteredTodos: Todo[] = getFilteredTodos();
 
   return (
-    <>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Ma Todo List</h1>
+      <TodoFilter onFilter={setFilter} currentFilter={filter} />
       <TodoForm
         valeur={valeur}
         onAddTodo={handleAddTodo}
         setValeur={setValeur}
       />
       <TodoListItem
-        todoList={todoList}
+        todoList={filteredTodos}
         setTodoList={setTodoList}
         onDeleteTodo={handleDeleteTodo}
         onToggled={handleToggled}
       />
-    </>
+    </div>
   );
 }
-
-
-git config --global user.name "Babs90000"
- git config --global user.email "b.camara.diaby@outlook.com"

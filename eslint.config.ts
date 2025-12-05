@@ -34,7 +34,7 @@ export default defineConfig([
       js.configs.recommended,
       reactPlugin.configs.flat.recommended,
       tsPlugin.configs.recommended,
-      'plugin:prettier/recommended'
+      "plugin:prettier/recommended",
     ],
 
     rules: {

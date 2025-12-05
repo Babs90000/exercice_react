@@ -2,8 +2,8 @@
   "compilerOptions": {
     // Cible et modules
     "target": "esnext",
-    "module": "nodenext",
-    "moduleResolution": "node",
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
@@ -11,7 +11,7 @@
     "jsx": "react-jsx",
 
     // Types globaux
-    "types": ["node", "react", "react-dom"],
+    // "types": ["node", "react", "react-dom"],
 
     // Sorties
     "rootDir": "./src",
@@ -41,7 +41,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": false
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
