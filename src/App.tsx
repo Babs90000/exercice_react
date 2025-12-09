@@ -1,5 +1,5 @@
-import AuthForm from "./components/AuthForm/AuthForm";
+import AdvancedCounter from "./components/AdvancedCounter/AdvancedCounter";
 
 export default function App() {
-  return <AuthForm />;
+  return <AdvancedCounter />;
 }

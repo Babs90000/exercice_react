@@ -90,6 +90,19 @@ export default function AuthForm() {
     }
   }
 
+  const isValidForm = (): boolean => {
+    return (
+      errors.email == null &&
+      errors.name == null &&
+      errors.password == null &&
+      errors.passwordConfirmation == null &&
+      formData.email !== "" &&
+      formData.name !== "" &&
+      formData.password !== "" &&
+      formData.passwordConfirmation !== ""
+    );
+  };
+
   const Data = (
     <div>
       <h1>Formulaire soumis avec succès</h1>
@@ -98,6 +111,21 @@ export default function AuthForm() {
     </div>
   );
 
+  function submitOtherForm() {
+    setIsSubmitted(false);
+    setFormData({
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: "",
+    });
+    setErrors({
+      name: null,
+      email: null,
+      password: null,
+      passwordConfirmation: null,
+    });
+  }
   console.log(`Data : ${Data}`);
 
   console.log(formData);
@@ -144,10 +172,17 @@ export default function AuthForm() {
         {errors.passwordConfirmation && (
           <p className={styles.error}>{errors.passwordConfirmation}</p>
         )}
-        <input type="submit" value="Soumettre" />
+        <input type="submit" value="Soumettre" disabled={!isValidForm()} />
       </form>
 
       {isSubmitted && Data}
+      {isSubmitted && (
+        <input
+          onClick={submitOtherForm}
+          type="submit"
+          value="Soumettre un nouveau formulaire"
+        />
+      )}
     </div>
   );
 }
