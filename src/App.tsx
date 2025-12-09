@@ -1,5 +1,5 @@
-import TodoInterface from "./components/TodoList/TodoInterface";
+import AuthForm from "./components/AuthForm/AuthForm";
 
 export default function App() {
-  return <TodoInterface />;
+  return <AuthForm />;
 }

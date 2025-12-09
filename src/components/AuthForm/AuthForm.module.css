@@ -1,0 +1,18 @@
+.error {
+  color: red;
+  border: 2px solid red;
+  border-radius: 3px;
+  padding: 3px;
+}
+
+.Form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  justify-items: center;
+  margin: 0px auto;
+}
+
+input {
+  margin: 10px auto;
+}
