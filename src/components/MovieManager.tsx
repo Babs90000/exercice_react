@@ -8,46 +8,38 @@ interface Movie {
 }
 
 export default function MovieManager() {
+  const [entry, setEntry] = useState<number>(0);
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [formData, setFormData] = useState<Omit<Movie, "id">>({
+    title: "",
+    ranking: 0,
+    watched: false,
+  });
 
   const moviesList = movies.map((movie) => (
     <div key={movie.id}>
       <h3>{movie.title}</h3>
       <p>{movie.ranking}</p>
-      {movie.watched == true ? (
-        <>
-          <p>vu</p>{" "}
-          {/* <input type="checkbox" name="Visionné ?" onChange={changeStatut} /> */}
-          <input
-            type="checkbox"
-            checked={movie.watched}
-            onChange={() => changeWatched(movie.id)}
-          />
-        </>
-      ) : (
-        <>
-          <p> À voir</p>
-          <input
-            type="checkbox"
-            checked={movie.watched}
-            onChange={() => changeWatched(movie.id)}
-          />
-        </>
-      )}
+      {movie.watched == true ? <p>vu</p> : <p> À voir</p>}
+      <input
+        type="checkbox"
+        checked={movie.watched}
+        onChange={() => changeWatched(movie.id)}
+      />
       <p onClick={() => remove(movie.id)}>supprimer</p>
     </div>
   ));
 
-  let newMovie: Movie = {
-    id: movies.length + 1,
-    title: "title",
-    ranking: 0,
-    watched: false,
-  };
-
   function add(e) {
     e.preventDefault();
+    const newMovie: Movie = { id: entry + 1, ...formData };
     setMovies([...movies, newMovie]);
+    setEntry(entry + 1);
+    setFormData({
+      title: "",
+      ranking: 0,
+      watched: false,
+    });
   }
 
   function remove(movieId: number) {
@@ -77,17 +69,24 @@ export default function MovieManager() {
         <input
           type="text"
           placeholder="titre du film"
-          onChange={(e) => (newMovie.title = e.target.value)}
+          value={formData.title}
+          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         />
         <input
           type="number"
           placeholder="note entre 0 et 10"
-          onChange={(e) => (newMovie.ranking = Number(e.target.value))}
+          value={formData.ranking}
+          onChange={(e) =>
+            setFormData({ ...formData, ranking: Number(e.target.value) })
+          }
         />
         <input
           type="checkbox"
           name="Visionné ?"
-          onChange={() => (newMovie.watched = !newMovie.watched)}
+          checked={formData.watched}
+          onChange={(e) =>
+            setFormData({ ...formData, watched: e.target.checked })
+          }
         />
         <input type="submit" />
       </form>
