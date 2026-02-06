@@ -1,5 +1,5 @@
-import AdvancedCounter from "./components/AdvancedCounter/AdvancedCounter";
+import MovieManager from "./components/MovieManager";
 
 export default function App() {
-  return <AdvancedCounter />;
+  return <MovieManager />;
 }

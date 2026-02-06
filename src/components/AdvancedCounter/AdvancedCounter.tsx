@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import CounterDisplay from "./CounterDisplay";
 import styles from "./AdvancedCounter.module.css";
 
-type Fonction = () => void;
-
 export default function AdvancedCounter() {
   const [count, setCount] = useState<number>(0);
   const [initialValue, setInitialValue] = useState<number>(0);
