@@ -1,5 +1,5 @@
-import MovieManager from "./components/MovieManager";
+import UserManager from "./components/UserManager/UserManager";
 
 export default function App() {
-  return <MovieManager />;
+  return <UserManager />;
 }
