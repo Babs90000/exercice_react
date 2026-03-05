@@ -1,5 +1,6 @@
-import UserManager from "./components/UserManager/UserManager";
+import TodoInterface from "./components/TodoList/TodoInterface";
+import TodoList from "./components/TodoList/TodoInterface";
 
 export default function App() {
-  return <UserManager />;
+  return <TodoInterface />;
 }

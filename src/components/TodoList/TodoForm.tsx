@@ -15,7 +15,7 @@ export default function TodoForm({ valeur, setValeur, onAddTodo }) {
         onChange={(e) => setValeur(e.target.value)}
         placeholder="Ajouter une tâche..."
       />
-      <button className={styles.input} type="submit">
+      <button className={styles.submitButton} type="submit">
         Ajouter
       </button>
     </form>
