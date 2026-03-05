@@ -1,8 +1,8 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
-COPY todo-list/package*.json ./      # ← pointe sur le sous-dossier
+COPY package*.json ./
 RUN npm install
-COPY todo-list/ .                    # ← copie uniquement todo-list
+COPY . .
 RUN npm run build
 
 FROM nginx:alpine
