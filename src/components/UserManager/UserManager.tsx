@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from "react";
 import SearchBar from "./SearchBar";
 import UserList from "./UserList";
-import { useFetch } from "./Hooks/useFetch";
+import { useFetch } from "../../Hooks/useFetch";
 
 export interface User {
   id: number;
