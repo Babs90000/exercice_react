@@ -15,5 +15,5 @@ export const useLocalStorage = <T,>(clé: string, valeurParDefaut: T) => {
     localStorage.setItem(clé, JSON.stringify(nouvelleValeur));
   };
 
-  return [value, setAndStore];
+  return [value, setAndStore] as const;
 };

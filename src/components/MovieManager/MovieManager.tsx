@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { MovieItem } from "./MovieItem";
-import { useCallback } from "react";
 import { useMemo } from "react";
 import { MovieStats } from "./MovieStats";
+import { useMovieManager } from "../../Hooks/useMovieManager";
+
+type CallBack = (id: number) => void;
+type Reset = () => void;
 
 export interface Movie {
   id: number;
@@ -11,11 +14,8 @@ export interface Movie {
   watched: boolean;
 }
 
-type MovieCallback = (id: number) => void;
-
 export default function MovieManager() {
-  const [entry, setEntry] = useState<number>(0);
-  const [movies, setMovies] = useState<Movie[]>([]);
+  const { state, dispatch } = useMovieManager();
   const [formData, setFormData] = useState<Omit<Movie, "id">>({
     title: "",
     ranking: 0,
@@ -24,9 +24,10 @@ export default function MovieManager() {
 
   const add = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newMovie: Movie = { id: entry + 1, ...formData };
-    setMovies([...movies, newMovie]);
-    setEntry(entry + 1);
+    dispatch({
+      type: "ADD_MOVIE",
+      payload: { id: Number(Date.now()), ...formData },
+    });
     setFormData({
       title: "",
       ranking: 0,
@@ -34,43 +35,38 @@ export default function MovieManager() {
     });
   };
 
-  const remove: MovieCallback = useCallback(
-    (movieId) => {
-      setMovies(movies.filter((movie) => movie.id !== movieId));
-    },
-    [movies],
+  const handleToggle: CallBack = useCallback(
+    (id) => dispatch({ type: "TOGGLE_WATCHED", payload: id }),
+    [dispatch],
   );
 
-  const changeWatched: MovieCallback = useCallback(
-    (movieId) => {
-      setMovies(
-        movies.map((movie) =>
-          movie.id == movieId ? { ...movie, watched: !movie.watched } : movie,
-        ),
-      );
-    },
-    [movies],
+  const handleDelete: CallBack = useCallback(
+    (id: number) => dispatch({ type: "REMOVE_MOVIE", payload: id }),
+    [dispatch],
   );
+
+  const handleReset: Reset = () => dispatch({ type: "CLEAR_MOVIES" });
 
   const movieWatched = useMemo(() => {
-    return movies.filter((movie) => movie.watched).length;
-  }, [movies]);
+    return state.movies.filter((movie) => movie.watched).length;
+  }, [state.movies]);
   const moviesAverage = useMemo(() => {
     return (
-      movies.reduce((acc, movie) => acc + movie.ranking, 0) / movies.length
+      state.movies.reduce((acc, movie) => acc + movie.ranking, 0) /
+      state.movies.length
     );
-  }, [movies]);
+  }, [state.movies]);
 
   const totalMovie = useMemo(() => {
-    return movies.length;
-  }, [movies]);
+    return state.movies.length;
+  }, [state.movies]);
 
-  const moviesList = movies.map((movie) => (
+  const moviesList = state.movies.map((movie) => (
     <MovieItem
       key={movie.id}
       movie={movie}
-      onDelete={remove}
-      onToggle={changeWatched}
+      onDelete={handleDelete}
+      onToggle={handleToggle}
     />
   ));
 
@@ -82,6 +78,7 @@ export default function MovieManager() {
         averageRating={moviesAverage}
         totalMovie={totalMovie}
       />
+      <button onClick={handleReset}>Tout supprimer</button>
       <form onSubmit={add}>
         <input
           type="text"
