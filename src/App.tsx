@@ -1,5 +1,4 @@
-import MovieManager from "./components/MovieManager/MovieManager";
-
+import TodoInterface from "./components/TodoList/TodoInterface";
 export default function App() {
-  return <MovieManager />;
+  return <TodoInterface />;
 }
